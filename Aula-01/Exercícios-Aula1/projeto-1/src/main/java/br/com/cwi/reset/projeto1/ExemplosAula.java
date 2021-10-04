@@ -44,16 +44,6 @@ public class ExemplosAula {
             }
         }
 
-
-
-
-
-
-
-
-
-
-
 //        Scanner scanner = new Scanner(System.in);
 //
 //        System.out.println("Digite sua Altura: ");
