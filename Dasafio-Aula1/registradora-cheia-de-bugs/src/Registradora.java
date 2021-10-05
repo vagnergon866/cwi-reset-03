@@ -12,7 +12,7 @@ public class Registradora {
 
         quintoBug();
 
-//       sextoBug();
+        sextoBug();
     }
 
     private static double registrarItem(String item, int quantidade) {
@@ -108,6 +108,7 @@ public class Registradora {
         int quantidade2 = 5;
 
         double precoTotal2 = registrarItem(item2, quantidade2);
+        System.out.println("Cliente 2");
 
         System.out.println(String.format("Valor total: %.2f", precoTotal2));
     }
