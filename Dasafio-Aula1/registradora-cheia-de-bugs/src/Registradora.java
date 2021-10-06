@@ -16,20 +16,30 @@ public class Registradora {
     }
 
     private static double registrarItem(String item, int quantidade) {
-        double precoItem = RelacaoPesoPreco.retornaPrecoProduto(item, quantidade);
+        double precoItem = 0.00;
+        int estoque = ItensPorQuantidade.adicionaItemNoEstoque(item);
 
-        if (QuantidadeMinimaItem.precisaReposicao(item)) {
+        if (QuantidadeMinimaItem.precisaReposicao(item) || estoque == 0) {
             if ("pao".equals(item) || "sanduiche".equals(item) || "torta".equals(item)) {
                 if (!DataProjeto.cozinhaEmFuncionamento()) {
                     System.out.println("Cozinha fechada!");
+                    System.out.println("Indisponivel para reposição do " + item + ", A quantidade restante no estoque é: " + estoque);
+
+                } else {
+                    ReposicaoCozinha.reporItem(item);
                 }
-                ReposicaoCozinha.reporItem(item);
             }
 
             if ("leite".equals(item) || "cafe".equals(item)) {
                 ReposicaoFornecedor.reporItem(item);
             }
         }
+        if ("leite".equals(item) || "cafe".equals(item)) {
+            ReposicaoFornecedor.reporItem(item);
+        }
+        estoque = ItensPorQuantidade.adicionaItemNoEstoque(item);
+        precoItem = (estoque > 0) ? RelacaoPesoPreco.retornaPrecoProduto(item, quantidade) : 0;
+        ItensPorQuantidade.tirarDoEstoque(item, quantidade);
 
         return precoItem;
     }
@@ -108,7 +118,6 @@ public class Registradora {
         int quantidade2 = 5;
 
         double precoTotal2 = registrarItem(item2, quantidade2);
-
 
         System.out.println(String.format("Valor total: %.2f", precoTotal2));
     }
