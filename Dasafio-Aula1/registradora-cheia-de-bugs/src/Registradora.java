@@ -23,7 +23,7 @@ public class Registradora {
             if ("pao".equals(item) || "sanduiche".equals(item) || "torta".equals(item)) {
                 if (!DataProjeto.cozinhaEmFuncionamento()) {
                     System.out.println("Cozinha fechada!");
-                    System.out.println("Indisponivel para reposição do " + item + ", A quantidade restante no estoque é: " + estoque);
+                    System.out.println("Reposição indisponivel de " + item + ", A quantidade restante no estoque é: " + estoque);
 
                 } else {
                     ReposicaoCozinha.reporItem(item);
