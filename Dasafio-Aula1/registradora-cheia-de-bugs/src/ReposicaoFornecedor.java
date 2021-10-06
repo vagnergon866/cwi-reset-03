@@ -8,7 +8,6 @@ public class ReposicaoFornecedor {
         if ("leite".equals(item)) {
             ItensPorQuantidade.leite = random.nextInt(40) + 10;
         }
-
         if ("cafe".equals(item)) {
             ItensPorQuantidade.cafe = random.nextInt(40) + 10;
         }
