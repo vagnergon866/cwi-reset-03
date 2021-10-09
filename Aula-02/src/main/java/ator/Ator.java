@@ -1,24 +1,15 @@
 package ator;
 
 import genero.Genero;
+import pessoa.Pessoa;
 
-public class Ator {
-    private String nome;
-    private Integer idade;
+public class Ator extends Pessoa {
+
     private Integer quantidadeDeOscars;
-    private Genero genero;
 
-    public Ator(String nome, Integer idade, Integer quantidadeDeOscars, Genero genero) {
-        this.nome = nome;
-        this.idade = idade;
-        this.quantidadeDeOscars = quantidadeDeOscars;
-        this.genero = genero;
-    }
+    public Ator(String nome, Integer idade, Genero genero, Integer quantidadeDeOscars) {
+        super(nome, idade, genero);
 
-    public void mostrarNaTela() {
-        System.out.println("Nome: " + nome);
-        System.out.println("Idade: " + idade);
-        System.out.println("Genero: " + genero.getDescricoes());
     }
 
 }
