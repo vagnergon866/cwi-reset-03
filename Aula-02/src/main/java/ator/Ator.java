@@ -1,6 +1,6 @@
 package ator;
 
-import aplicacao.Genero;
+import genero.Genero;
 
 public class Ator {
     private String nome;

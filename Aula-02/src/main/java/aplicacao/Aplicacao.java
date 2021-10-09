@@ -3,11 +3,12 @@ package aplicacao;
 import ator.Ator;
 import diretor.Diretor;
 import filmes.Filmes;
+import genero.Genero;
 
 public class Aplicacao {
     public static void main(String[] args) {
 
-        Diretor diretor = new Diretor("Vagner",28,15,Genero.MASCULINO);
+        Diretor diretor = new Diretor("Vagner",28,15, Genero.MASCULINO);
 
         Ator ator = new Ator("Fabio",35,2,Genero.MASCULINO);
 

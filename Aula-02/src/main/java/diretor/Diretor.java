@@ -1,6 +1,6 @@
 package diretor;
 
-import aplicacao.Genero;
+import genero.Genero;
 
 public class Diretor {
     private String nome;

@@ -1,4 +1,4 @@
-package aplicacao;
+package genero;
 
 public enum Genero {
     MASCULINO("Masculino"),
