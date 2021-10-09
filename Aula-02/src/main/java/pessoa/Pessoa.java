@@ -2,7 +2,7 @@ package pessoa;
 
 import genero.Genero;
 
-public class Pessoa {
+public abstract class  Pessoa {
     private String nome;
     private Integer idade;
     private Genero genero;
