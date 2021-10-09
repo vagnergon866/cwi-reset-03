@@ -1,20 +1,22 @@
-package diretor;
+package ator;
 
 import aplicacao.Genero;
 
-public class Diretor {
+public class Ator {
     private String nome;
     private Integer idade;
-    private  Integer quantidadeDeFilmes;
+    private Integer quantidadeDeOscars;
     private Genero genero;
 
 
-    public Diretor(String nome, Integer idade, Integer quantidadeDeFilmes, Genero genero){
+
+    public Ator(String nome, Integer idade, Integer quantidadeDeOscars, Genero genero) {
         this.nome = nome;
         this.idade = idade;
-        this.quantidadeDeFilmes = quantidadeDeFilmes;
+        this.quantidadeDeOscars = quantidadeDeOscars;
         this.genero = genero;
     }
+
 
     public void mostrarNaTela(){
         System.out.println("Nome: "+ nome);
