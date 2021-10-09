@@ -24,7 +24,7 @@ public class Filmes {
         System.out.println("Filme: " + nome);
         System.out.println("Descrição: " + descrisao);
         System.out.println("Duração: "+ tempo);
-        System.out.println("Diretor: " + diretor);
+        System.out.println("Diretor: " + diretor.getNome());
 
     }
 
