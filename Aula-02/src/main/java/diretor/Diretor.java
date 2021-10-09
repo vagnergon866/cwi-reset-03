@@ -8,7 +8,6 @@ public class Diretor {
     private  Integer quantidadeDeFilmes;
     private Genero genero;
 
-
     public Diretor(String nome, Integer idade, Integer quantidadeDeFilmes, Genero genero){
         this.nome = nome;
         this.idade = idade;
@@ -20,6 +19,10 @@ public class Diretor {
         System.out.println("Nome: "+ nome);
         System.out.println("Idade: " + idade);
         System.out.println("Genero: " + genero.getDescricoes());
+    }
+
+    public String getNome() {
+        return nome;
     }
 
 }

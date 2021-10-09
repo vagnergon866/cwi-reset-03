@@ -11,12 +11,16 @@ public class Aplicacao {
 
         Ator ator = new Ator("Fabio",35,2,Genero.MASCULINO);
 
-        Filmes LagoaAzul = new Filmes("Lagoa Azul", "Historia na ilha ", 150,1993,4,"Vagner");
-        Filmes MarvelHeros = new Filmes("MarvelHeros","Filme de Super Heróis ",180,2012,5,
-        "Vagner");
+        Filmes filmes = new Filmes("Lagoa Azul", "Historia na ilha ", 150,1993,5.0,diretor);
+        Filmes filmes1 = new Filmes("Super Heros","Sobre Heróis",150,2012,5.0,diretor);
 
-        LagoaAzul.reproduzir();
+        System.out.println("Descrição do Filme:");
+        filmes.reproduzir();
+        System.out.println("----");
+        System.out.println("Descreição do Ator:");
         ator.mostrarNaTela();
+        System.out.println("----");
+        System.out.println("Descrição do Diretor:");
         diretor.mostrarNaTela();
 
     }

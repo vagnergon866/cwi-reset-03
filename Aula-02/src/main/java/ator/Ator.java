@@ -8,8 +8,6 @@ public class Ator {
     private Integer quantidadeDeOscars;
     private Genero genero;
 
-
-
     public Ator(String nome, Integer idade, Integer quantidadeDeOscars, Genero genero) {
         this.nome = nome;
         this.idade = idade;
@@ -17,9 +15,8 @@ public class Ator {
         this.genero = genero;
     }
 
-
-    public void mostrarNaTela(){
-        System.out.println("Nome: "+ nome);
+    public void mostrarNaTela() {
+        System.out.println("Nome: " + nome);
         System.out.println("Idade: " + idade);
         System.out.println("Genero: " + genero.getDescricoes());
     }
