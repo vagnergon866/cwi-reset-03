@@ -1,4 +1,4 @@
-package filmes;
+package exception;
 
 public class AvaliacaoForaDoPadraoException extends Exception {
 

@@ -2,7 +2,7 @@ package aplicacao;
 
 import ator.Ator;
 import diretor.Diretor;
-import filmes.AvaliacaoForaDoPadraoException;
+import exception.AvaliacaoForaDoPadraoException;
 import filmes.Filmes;
 import genero.Genero;
 

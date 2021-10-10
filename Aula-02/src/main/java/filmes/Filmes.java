@@ -1,6 +1,7 @@
 package filmes;
 
 import diretor.Diretor;
+import exception.AvaliacaoForaDoPadraoException;
 
 public class Filmes {
 
@@ -11,7 +12,7 @@ public class Filmes {
     private Double avaliacao;
     private Diretor diretor;
 
-    public Filmes(String nome, String descrisao, Integer tempo, Integer anoLancamento, Double avaliacao, Diretor diretor)throws AvaliacaoForaDoPadraoException{
+    public Filmes(String nome, String descrisao, Integer tempo, Integer anoLancamento, Double avaliacao, Diretor diretor)throws AvaliacaoForaDoPadraoException {
         if(avaliacao < 1.0 || avaliacao > 5.0){
             throw new AvaliacaoForaDoPadraoException();
         }
