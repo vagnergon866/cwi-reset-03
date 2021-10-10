@@ -2,20 +2,23 @@ package pessoa;
 
 import genero.Genero;
 
+import java.time.LocalDate;
+import java.time.Period;
+
 public abstract class Pessoa<dataDeNascimento> {
     private String nome;
-    private Integer dataDeNascimento;
+    private LocalDate dataNascimento;
     private Genero genero;
 
-    public Pessoa(String nome, Integer dataDeNascimento, Genero genero) {
+    public Pessoa(String nome, LocalDate dataNascimento, Genero genero) {
         this.nome = nome;
-        this.dataDeNascimento = dataDeNascimento;
+        this.dataNascimento = dataNascimento;
         this.genero = genero;
     }
 
     public void mostrarNaTela() {
         System.out.println("Nome: " + nome);
-        System.out.println("Idade: " + dataDeNascimento);
+        System.out.println("Data do nascimento: " + this.dataNascimento);
         System.out.println("Genero: " + genero.getDescricoes());
     }
 
@@ -23,4 +26,15 @@ public abstract class Pessoa<dataDeNascimento> {
         return nome;
     }
 
+    public void  calcularIdade() {
+        LocalDate dataAtual = LocalDate.now();
+        Period periodo = Period.between(dataNascimento, dataAtual);
+        System.out.println("Idade: " + periodo.getYears());
+
+    }
+
+
 }
+
+
+
