@@ -2,21 +2,26 @@ package aplicacao;
 
 import ator.Ator;
 import diretor.Diretor;
+import filmes.AvaliacaoForaDoPadraoException;
 import filmes.Filmes;
 import genero.Genero;
 
 public class Aplicacao {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws AvaliacaoForaDoPadraoException {
 
         Diretor diretor = new Diretor("Vagner",28,Genero.MASCULINO,12);
         Ator ator = new Ator("Fabio",35,Genero.MASCULINO,5);
 
-        Filmes filmes = new Filmes("Lagoa Azul", "Historia na ilha ", 150,1993,5.0,diretor);
-        Filmes filmes1 = new Filmes("Super Heros","Sobre Heróis",150,2012,5.0,diretor);
+        Filmes LagoaAzul = new Filmes("Lagoa Azul", "História na ilha ", 150,1992,4.0,diretor);
+        Filmes SuperHeros = new Filmes("Super Heros","História dos Heróis",160,2012,.0,diretor);
+
 
         System.out.println("Descrição do Filme:");
-        filmes.reproduzir();
+        LagoaAzul.reproduzir();
         System.out.println("----");
+        SuperHeros.reproduzir();
+        System.out.println("----");
+
         System.out.println("Descreição do Ator:");
         ator.mostrarNaTela();
         System.out.println("----");
@@ -24,4 +29,5 @@ public class Aplicacao {
         diretor.mostrarNaTela();
 
     }
+
 }
