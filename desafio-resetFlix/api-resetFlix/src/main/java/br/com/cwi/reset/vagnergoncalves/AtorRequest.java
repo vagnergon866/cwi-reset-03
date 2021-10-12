@@ -31,4 +31,10 @@ public class AtorRequest {
     public Integer getAnoInicioAtividade() {
         return anoInicioAtividade;
     }
+    public String toString(){
+        return "Ator: \nNome: " + nome +
+                "\nData Nascimento: " + dataNascimento +
+                "\nStatus Carreira: " + statusCarreira +
+                "\nAno anicio atividade: " + anoInicioAtividade + ". ";
+    }
 }

@@ -6,7 +6,7 @@ public enum TipoAtuacao {
     COADJUVANTE("Cosdjuvante");
 
     private String descricao;
-    
+
     TipoAtuacao(String descricao) {
         this.descricao = descricao;
     }

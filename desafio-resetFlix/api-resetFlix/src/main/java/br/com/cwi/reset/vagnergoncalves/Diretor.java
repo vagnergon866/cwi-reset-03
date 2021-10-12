@@ -15,4 +15,16 @@ public class Diretor {
         this.dataNascimento = dataNascimento;
         this.anoInicioAtividade = anoInicioAtividade;
     }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public System getNome() {
+        return nome;
+    }
 }

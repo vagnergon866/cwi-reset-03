@@ -29,4 +29,10 @@ public class Ator {
     public String getNome() {
         return nome;
     }
+    public String toString(){
+        return "Ator: "+ "\nId: " + id + "\nNome: " + nome +
+                "\nData Nascimento: " + dataNascimento +
+                "\nStatus Carreira: " + statusCarreira +
+                "\nAno anicio atividade: " + anoInicioAtividade + ". ";
+    }
 }
