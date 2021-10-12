@@ -8,7 +8,7 @@ public class Testes {
         FakeDatabase fakeDatabase = new FakeDatabase();
         AtorService atorService = new AtorService(fakeDatabase);
 
-        AtorRequest atorRequest = new AtorRequest("Vagner", LocalDate.of(1992,12,10),StatusCarreira.EM_ATIVIDADE,
+        AtorRequest atorRequest = new AtorRequest( "Vagner",LocalDate.of(1992,12,10),StatusCarreira.EM_ATIVIDADE,
                 2005);
         atorService.criarAtor(atorRequest);
         AtorRequest atorRequest1 = new AtorRequest("Vagninho", LocalDate.of(1992,12,10),StatusCarreira.EM_ATIVIDADE,
