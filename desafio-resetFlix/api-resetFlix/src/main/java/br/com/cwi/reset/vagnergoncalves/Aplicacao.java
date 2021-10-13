@@ -11,7 +11,7 @@ import java.util.List;
 
 public class Aplicacao {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         FakeDatabase fakeDatabase = new FakeDatabase();
 
         AtorService atorService = new AtorService(fakeDatabase);
@@ -22,7 +22,7 @@ public class Aplicacao {
         Integer anoInicioAtividade = 1986;
         AtorRequest atorRequest = new AtorRequest(nome, dataNascimento, statusCarreira, anoInicioAtividade);
 
-        atorService.criarAtor(atorRequest);
+       atorService.criarAtor(atorRequest);
 
         List<Ator> atores = fakeDatabase.recuperaAtores();
 

@@ -1,37 +1,21 @@
-package domain;
+package request;
 
 import java.time.LocalDate;
 
-public class Ator {
+public class DiretorRequest {
 
-    private Integer id;
     private String nome;
     private LocalDate dataNascimento;
-    private StatusCarreira statusCarreira;
     private Integer anoInicioAtividade;
 
-    public Ator(String nome, LocalDate dataNascimento, StatusCarreira statusCarreira, Integer anoInicioAtividade) {
-        this.id = id;
+    public DiretorRequest(String nome, LocalDate dataNascimento, Integer anoInicioAtividade) {
         this.nome = nome;
         this.dataNascimento = dataNascimento;
-        this.statusCarreira = statusCarreira;
         this.anoInicioAtividade = anoInicioAtividade;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
     }
 
     public String getNome() {
         return nome;
-    }
-
-    public StatusCarreira getStatusCarreira() {
-        return statusCarreira;
     }
 
     public LocalDate getDataNascimento() {
@@ -43,11 +27,8 @@ public class Ator {
     }
 
     public String toString() {
-        return "Ator: \nId: " + id + "\nNome: " + nome +
+        return "Diretor: \nNome: " + nome +
                 "\nData Nascimento: " + dataNascimento +
-                "\nStatus Carreira: " + statusCarreira +
                 "\nAno anicio atividade: " + anoInicioAtividade + ". ";
     }
-
-
 }

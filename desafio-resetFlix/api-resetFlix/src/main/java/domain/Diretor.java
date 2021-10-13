@@ -5,11 +5,11 @@ import java.time.LocalDate;
 public class Diretor {
 
     private Integer id;
-    private System nome;
+    private String nome;
     private LocalDate dataNascimento;
     private Integer anoInicioAtividade;
 
-    public Diretor(Integer id, System nome, LocalDate dataNascimento, Integer anoInicioAtividade) {
+    public Diretor(String nome, LocalDate dataNascimento, Integer anoInicioAtividade) {
         this.id = id;
         this.nome = nome;
         this.dataNascimento = dataNascimento;
@@ -24,7 +24,20 @@ public class Diretor {
         this.id = id;
     }
 
-    public System getNome() {
+    public String getNome() {
         return nome;
+    }
+
+    public LocalDate getDataNascimento() {
+        return dataNascimento;
+    }
+
+    public Integer getAnoInicioAtividade() {
+        return anoInicioAtividade;
+    }
+    public String toString(){
+        return "Diretor: \nId: " + id + "\nNome: " + nome +
+                "\nData Nascimento: " + dataNascimento +
+                "\nAno anicio atividade: " + anoInicioAtividade + ". ";
     }
 }

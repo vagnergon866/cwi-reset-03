@@ -14,10 +14,11 @@ public class FakeDatabase {
 
     private List<Ator> atores = new ArrayList<>();
     private List<Diretor> diretores = new ArrayList<>();
-    private Integer versionadorId = 0;
+    private Integer contadorIdAtor = 0;
+    private Integer contadorIdDiretor = 0;
 
     public void persisteAtor(Ator ator) {
-        ator.setId(gerarId());
+        ator.setId(gerarIdAtor());
         atores.add(ator);
     }
 
@@ -26,6 +27,7 @@ public class FakeDatabase {
     }
 
     public void persisteDiretor(Diretor diretor) {
+        diretor.setId(gerarIdDiretor());
         diretores.add(diretor);
     }
 
@@ -33,9 +35,14 @@ public class FakeDatabase {
         return diretores;
     }
 
-    public Integer gerarId() {
-        return ++versionadorId;
+    public Integer gerarIdAtor() {
+        return ++contadorIdAtor;
     }
+
+    public Integer gerarIdDiretor() {
+        return ++contadorIdDiretor;
+    }
+
 
     public List<AtorEmAtividade> filtraAtorEmAtividade(Optional<String> filtroNome) {
         return atores.stream().filter(a -> filtroNome.isPresent() ? a.getNome().equals(filtroNome.get()) : true)
