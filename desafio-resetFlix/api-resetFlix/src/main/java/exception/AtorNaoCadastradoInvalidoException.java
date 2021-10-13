@@ -1,4 +1,4 @@
-package br.com.cwi.reset.vagnergoncalves;
+package exception;
 
 public class AtorNaoCadastradoInvalidoException extends Exception{
 

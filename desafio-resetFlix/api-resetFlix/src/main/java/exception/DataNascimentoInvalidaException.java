@@ -1,4 +1,4 @@
-package br.com.cwi.reset.vagnergoncalves;
+package exception;
 
 public class DataNascimentoInvalidaException extends Exception {
 

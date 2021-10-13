@@ -1,4 +1,6 @@
-package br.com.cwi.reset.vagnergoncalves;
+package request;
+
+import domain.StatusCarreira;
 
 import java.time.LocalDate;
 

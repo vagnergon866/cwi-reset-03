@@ -1,7 +1,15 @@
-package br.com.cwi.reset.vagnergoncalves;
+package service;
+
+import domain.Ator;
+import domain.AtorEmAtividade;
+import br.com.cwi.reset.vagnergoncalves.FakeDatabase;
+import domain.StatusCarreira;
+import exception.*;
+import request.AtorRequest;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 public class AtorService {
@@ -12,7 +20,13 @@ public class AtorService {
         this.fakeDatabase = fakeDatabase;
     }
 
-    public void criarAtor(AtorRequest atorRequest){
+    public void criarAtor(AtorRequest atorRequest)throws Exception {
+        camposObrigatorios(atorRequest);
+        validaDataNascimento(atorRequest);
+        validaSobrenome(atorRequest);
+        validaAnoInicioDeAtividade(atorRequest);
+        validaNomeUnicoAtor(atorRequest);
+
         Ator DtoAtor = atorAdapter(atorRequest);
         fakeDatabase.persisteAtor(DtoAtor);
     }
@@ -81,5 +95,39 @@ public class AtorService {
             }
         }
     }
+
+    public List<AtorEmAtividade> listarAtorEmAtividade(Optional<String> filtroNome) throws AtorNaoCadastradoInvalidoException, FiltroNomeAtorInvalidoException {
+        Integer listaAtualDeAtores = fakeDatabase.recuperaAtores().size();
+        if (listaAtualDeAtores == 0) {
+            throw new AtorNaoCadastradoInvalidoException();
+        }
+        List<AtorEmAtividade> resultado = fakeDatabase.filtraAtorEmAtividade(filtroNome);
+        System.out.println(resultado.size());
+        if (resultado.isEmpty()) {
+            String filtro = filtroNome.map(Objects::toString).orElse(null);
+            throw new FiltroNomeAtorInvalidoException(filtro);
+        }
+        return resultado;
+    }
+
+    public Optional<Ator> consultarAtor(Integer id) throws CamposInvalidosException, IdInvalidoException {
+        if (id == null) {
+            throw new CamposInvalidosException("id");
+        }
+        Optional<Ator> atorEncontrado = fakeDatabase.consultaTodosAtores(id);
+        if (atorEncontrado.isPresent()) {
+            throw new IdInvalidoException("ator", id);
+        }
+        return atorEncontrado;
+    }
+
+    public List<Ator> consultaAtores() throws AtorNaoCadastradoInvalidoException {
+        List<Ator> atores = fakeDatabase.recuperaAtores();
+        if (atores.isEmpty()) {
+            throw new AtorNaoCadastradoInvalidoException();
+        }
+        return atores;
+    }
+
 
 }

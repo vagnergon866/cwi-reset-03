@@ -1,4 +1,4 @@
-package br.com.cwi.reset.vagnergoncalves;
+package domain;
 
 import java.time.LocalDate;
 

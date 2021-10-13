@@ -1,5 +1,10 @@
 package br.com.cwi.reset.vagnergoncalves;
 
+import domain.Ator;
+import domain.StatusCarreira;
+import request.AtorRequest;
+import service.AtorService;
+
 import java.time.LocalDate;
 import java.util.List;
 
@@ -8,7 +13,7 @@ public class Testes {
         FakeDatabase fakeDatabase = new FakeDatabase();
         AtorService atorService = new AtorService(fakeDatabase);
 
-        AtorRequest atorRequest = new AtorRequest( "Vagner",LocalDate.of(1992,12,10),StatusCarreira.EM_ATIVIDADE,
+        AtorRequest atorRequest = new AtorRequest( "Vagner",LocalDate.of(1992,12,10), StatusCarreira.EM_ATIVIDADE,
                 2005);
         atorService.criarAtor(atorRequest);
         AtorRequest atorRequest1 = new AtorRequest("Vagninho", LocalDate.of(1992,12,10),StatusCarreira.EM_ATIVIDADE,

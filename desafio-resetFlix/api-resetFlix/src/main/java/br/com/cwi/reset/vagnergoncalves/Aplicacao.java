@@ -1,5 +1,10 @@
 package br.com.cwi.reset.vagnergoncalves;
 
+import domain.Ator;
+import domain.StatusCarreira;
+import request.AtorRequest;
+import service.AtorService;
+
 import java.time.LocalDate;
 import java.time.Month;
 import java.util.List;

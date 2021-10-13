@@ -1,5 +1,10 @@
 package br.com.cwi.reset.vagnergoncalves;
 
+import domain.Ator;
+import domain.AtorEmAtividade;
+import domain.Diretor;
+import domain.StatusCarreira;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;

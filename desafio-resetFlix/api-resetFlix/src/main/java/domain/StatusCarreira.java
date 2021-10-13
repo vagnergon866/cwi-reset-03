@@ -1,4 +1,4 @@
-package br.com.cwi.reset.vagnergoncalves;
+package domain;
 
 public enum StatusCarreira {
     EM_ATIVIDADE("Em atividade"),
