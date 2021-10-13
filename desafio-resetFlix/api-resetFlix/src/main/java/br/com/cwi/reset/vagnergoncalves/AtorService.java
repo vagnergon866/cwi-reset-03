@@ -2,6 +2,7 @@ package br.com.cwi.reset.vagnergoncalves;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 public class AtorService {
 
@@ -11,8 +12,7 @@ public class AtorService {
         this.fakeDatabase = fakeDatabase;
     }
 
-    public void criarAtor(AtorRequest atorRequest) {
-
+    public void criarAtor(AtorRequest atorRequest){
         Ator DtoAtor = atorAdapter(atorRequest);
         fakeDatabase.persisteAtor(DtoAtor);
     }
@@ -81,6 +81,5 @@ public class AtorService {
             }
         }
     }
-
 
 }

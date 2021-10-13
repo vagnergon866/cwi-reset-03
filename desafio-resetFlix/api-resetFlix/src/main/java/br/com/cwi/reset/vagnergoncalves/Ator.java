@@ -29,10 +29,25 @@ public class Ator {
     public String getNome() {
         return nome;
     }
+
+    public StatusCarreira getStatusCarreira() {
+        return statusCarreira;
+    }
+
+    public LocalDate getDataNascimento() {
+        return dataNascimento;
+    }
+
+    public Integer getAnoInicioAtividade() {
+        return anoInicioAtividade;
+    }
+
     public String toString(){
         return "Ator: "+ "\nId: " + id + "\nNome: " + nome +
                 "\nData Nascimento: " + dataNascimento +
                 "\nStatus Carreira: " + statusCarreira +
                 "\nAno anicio atividade: " + anoInicioAtividade + ". ";
     }
+
+
 }
