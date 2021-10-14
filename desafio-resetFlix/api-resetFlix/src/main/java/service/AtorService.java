@@ -86,12 +86,12 @@ public class AtorService {
         }
     }
 
-    private void validaNomeUnicoAtor(AtorRequest atorRequest) throws AtorComMesmoNomeInvalidoException {
+    private void validaNomeUnicoAtor(AtorRequest atorRequest) throws ComMesmoNomeInvalidoException {
         String nomeDoAtor = atorRequest.getNome();
         List<Ator> atores = fakeDatabase.recuperaAtores();
         for (Ator ator : atores) {
             if (ator.getNome().equals(nomeDoAtor)) {
-                throw new AtorComMesmoNomeInvalidoException(nomeDoAtor);
+                throw new ComMesmoNomeInvalidoException(nomeDoAtor);
             }
         }
     }
