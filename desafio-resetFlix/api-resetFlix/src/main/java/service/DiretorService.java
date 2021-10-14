@@ -7,6 +7,7 @@ import request.DiretorRequest;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 
 public class DiretorService {
@@ -17,7 +18,14 @@ public class DiretorService {
         this.fakeDatabase = fakeDatabase;
     }
 
-    public void criarDiretor(DiretorRequest diretorRequest) {
+    public void criarDiretor(DiretorRequest diretorRequest) throws Exception {
+        camposObrigatorios(diretorRequest);
+        validaDataNascimento(diretorRequest);
+        validaSobrenome(diretorRequest);
+        validaAnoInicioDeAtividade(diretorRequest);
+        validaAnoInicioDeAtividade(diretorRequest);
+        validaNomeUnicoDiretor(diretorRequest);
+
         Diretor DtoDiretor = diretorAdapter(diretorRequest);
         fakeDatabase.persisteDiretor(DtoDiretor);
     }
@@ -81,7 +89,37 @@ public class DiretorService {
             }
         }
     }
-    
 
+    public List<Diretor> listarDiretor(Optional<String> filtrarNome) throws NaoCadastradoInvalidoException, FiltroNomeAtorInvalidoException {
+        Integer listaAtualDeDiretores = fakeDatabase.recuperaDiretores().size();
+        if (listaAtualDeDiretores == 0) {
+            throw new NaoCadastradoInvalidoException();
+        }
+        List<Diretor> resultado = fakeDatabase.listaDiretor(filtrarNome);
+        if (resultado.isEmpty()) {
+            String filtro = filtrarNome.map(Object::toString).orElse(null);
+            throw new FiltroNomeAtorInvalidoException(filtro);
+        }
+        return resultado;
+    }
+
+    public Optional<Diretor> consultarDiretor(Integer id) throws CamposInvalidosException, IdInvalidoException {
+        if (id == null) {
+            throw new CamposInvalidosException("id");
+        }
+        Optional<Diretor> diretorEncontrado = fakeDatabase.consultaTodosDiretoresId(id);
+        if (diretorEncontrado.isPresent()) {
+            throw new IdInvalidoException(id);
+        }
+        return diretorEncontrado;
+    }
+
+    private List<Diretor> consultarDiretores() throws NaoCadastradoInvalidoException {
+        List<Diretor> diretores = fakeDatabase.recuperaDiretores();
+        if (diretores.isEmpty()) {
+            throw new NaoCadastradoInvalidoException();
+        }
+        return diretores;
+    }
 
 }

@@ -1,8 +1,8 @@
 package exception;
 
-public class AtorNaoCadastradoInvalidoException extends Exception{
+public class NaoCadastradoInvalidoException extends Exception{
 
-    public AtorNaoCadastradoInvalidoException(){
+    public NaoCadastradoInvalidoException(){
         super("Nenhum Ator ou Diretor cadastrado, favor cadastar Atores ou Diretores.");
     }
 }

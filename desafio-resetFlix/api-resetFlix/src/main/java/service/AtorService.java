@@ -96,10 +96,10 @@ public class AtorService {
         }
     }
 
-    public List<AtorEmAtividade> listarAtorEmAtividade(Optional<String> filtroNome) throws AtorNaoCadastradoInvalidoException, FiltroNomeAtorInvalidoException {
+    public List<AtorEmAtividade> listarAtorEmAtividade(Optional<String> filtroNome) throws NaoCadastradoInvalidoException, FiltroNomeAtorInvalidoException {
         Integer listaAtualDeAtores = fakeDatabase.recuperaAtores().size();
         if (listaAtualDeAtores == 0) {
-            throw new AtorNaoCadastradoInvalidoException();
+            throw new NaoCadastradoInvalidoException();
         }
         List<AtorEmAtividade> resultado = fakeDatabase.filtraAtorEmAtividade(filtroNome);
         System.out.println(resultado.size());
@@ -114,20 +114,19 @@ public class AtorService {
         if (id == null) {
             throw new CamposInvalidosException("id");
         }
-        Optional<Ator> atorEncontrado = fakeDatabase.consultaTodosAtores(id);
+        Optional<Ator> atorEncontrado = fakeDatabase.consultaTodosAtoresId(id);
         if (atorEncontrado.isPresent()) {
-            throw new IdInvalidoException("ator", id);
+            throw new IdInvalidoException(id);
         }
         return atorEncontrado;
     }
 
-    public List<Ator> consultaAtores() throws AtorNaoCadastradoInvalidoException {
+    public List<Ator> consultaAtores() throws NaoCadastradoInvalidoException {
         List<Ator> atores = fakeDatabase.recuperaAtores();
         if (atores.isEmpty()) {
-            throw new AtorNaoCadastradoInvalidoException();
+            throw new NaoCadastradoInvalidoException();
         }
         return atores;
     }
-
 
 }

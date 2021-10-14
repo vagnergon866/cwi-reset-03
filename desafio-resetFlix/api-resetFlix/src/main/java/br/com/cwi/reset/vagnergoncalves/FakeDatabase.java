@@ -43,16 +43,15 @@ public class FakeDatabase {
         return ++contadorIdDiretor;
     }
 
-
     public List<AtorEmAtividade> filtraAtorEmAtividade(Optional<String> filtroNome) {
-        return atores.stream().filter(a -> filtroNome.isPresent() ? a.getNome().equals(filtroNome.get()) : true)
+        return atores.stream()  .filter(a -> filtroNome.isPresent() ? a.getNome().equals(filtroNome.get()) : true)
                 .filter(a -> a.getStatusCarreira().equals(StatusCarreira.EM_ATIVIDADE))
                 .map(a -> new AtorEmAtividade(a.getId(), a.getNome(), a.getDataNascimento()))
                 .collect(Collectors.toList());
 
     }
 
-    public Optional<Ator> consultaTodosAtores(Integer id) {
+    public Optional<Ator> consultaTodosAtoresId(Integer id) {
         return atores.stream()
                 .filter(a -> a.getId().equals(id))
                 .findFirst();
@@ -62,6 +61,14 @@ public class FakeDatabase {
         return atores.stream().collect(Collectors.toList());
 
     }
+    public List<Diretor> listaDiretor(Optional<String> filtrarNome){
+        return diretores.stream().filter(d -> filtrarNome.isPresent() ? d.getNome().equals(filtrarNome.get()) : true)
+                .collect(Collectors.toList());
+    }
+    public Optional<Diretor> consultaTodosDiretoresId(Integer id){
+        return diretores.stream().filter(d -> d.getId().equals(id) ).findFirst();
+    }
+
 
 
 }
