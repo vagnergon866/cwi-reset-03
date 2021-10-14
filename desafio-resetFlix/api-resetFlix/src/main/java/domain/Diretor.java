@@ -35,9 +35,14 @@ public class Diretor {
     public Integer getAnoInicioAtividade() {
         return anoInicioAtividade;
     }
-    public String toString(){
-        return "Diretor: \nId: " + id + "\nNome: " + nome +
-                "\nData Nascimento: " + dataNascimento +
-                "\nAno anicio atividade: " + anoInicioAtividade + ". ";
+
+    @Override
+    public String toString() {
+        return "Diretor{" +
+                "id=" + id +
+                ", nome='" + nome + '\'' +
+                ", dataNascimento=" + dataNascimento +
+                ", anoInicioAtividade=" + anoInicioAtividade +
+                '}';
     }
 }

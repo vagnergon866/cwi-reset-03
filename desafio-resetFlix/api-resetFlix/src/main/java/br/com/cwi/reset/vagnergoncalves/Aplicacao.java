@@ -29,6 +29,6 @@ public class Aplicacao {
         System.out.println("Deve conter 1 ator, quantidade encontrada: " + atores.size());
         System.out.println("Primeiro ator deve ser 'Will Smith', valor encontrado: " + atores.get(0).getNome());
 
-      
+
     }
 }

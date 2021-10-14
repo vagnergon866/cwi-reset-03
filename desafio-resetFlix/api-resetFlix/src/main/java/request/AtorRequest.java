@@ -33,10 +33,14 @@ public class AtorRequest {
     public Integer getAnoInicioAtividade() {
         return anoInicioAtividade;
     }
-    public String toString(){
-        return "Ator: \nNome: " + nome +
-                "\nData Nascimento: " + dataNascimento +
-                "\nStatus Carreira: " + statusCarreira +
-                "\nAno anicio atividade: " + anoInicioAtividade + ". ";
+
+    @Override
+    public String toString() {
+        return "AtorRequest{" +
+                "nome='" + nome + '\'' +
+                ", dataNascimento=" + dataNascimento +
+                ", statusCarreira=" + statusCarreira +
+                ", anoInicioAtividade=" + anoInicioAtividade +
+                '}';
     }
 }

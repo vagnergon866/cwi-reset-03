@@ -42,12 +42,14 @@ public class Ator {
         return anoInicioAtividade;
     }
 
+    @Override
     public String toString() {
-        return "Ator: \nId: " + id + "\nNome: " + nome +
-                "\nData Nascimento: " + dataNascimento +
-                "\nStatus Carreira: " + statusCarreira +
-                "\nAno anicio atividade: " + anoInicioAtividade + ". ";
+        return "Ator{" +
+                "id=" + id +
+                ", nome='" + nome + '\'' +
+                ", dataNascimento=" + dataNascimento +
+                ", statusCarreira=" + statusCarreira +
+                ", anoInicioAtividade=" + anoInicioAtividade +
+                '}';
     }
-
-
 }
