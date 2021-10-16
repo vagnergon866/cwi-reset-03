@@ -114,6 +114,7 @@ public class AtorService {
         if (id == null) {
             throw new CamposInvalidosException("id");
         }
+
         Optional<Ator> atorEncontrado = fakeDatabase.consultaTodosAtoresId(id);
         if (atorEncontrado.isPresent()) {
             throw new IdInvalidoException(id);
