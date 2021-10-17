@@ -26,12 +26,4 @@ public class DiretorRequest {
         return anoInicioAtividade;
     }
 
-    @Override
-    public String toString() {
-        return "DiretorRequest{" +
-                "nome='" + nome + '\'' +
-                ", dataNascimento=" + dataNascimento +
-                ", anoInicioAtividade=" + anoInicioAtividade +
-                '}';
-    }
 }

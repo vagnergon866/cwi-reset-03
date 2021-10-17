@@ -1,5 +1,7 @@
 package request;
 
+
+
 import domain.StatusCarreira;
 
 import java.time.LocalDate;
@@ -32,15 +34,5 @@ public class AtorRequest {
 
     public Integer getAnoInicioAtividade() {
         return anoInicioAtividade;
-    }
-
-    @Override
-    public String toString() {
-        return "AtorRequest{" +
-                "nome='" + nome + '\'' +
-                ", dataNascimento=" + dataNascimento +
-                ", statusCarreira=" + statusCarreira +
-                ", anoInicioAtividade=" + anoInicioAtividade +
-                '}';
     }
 }
