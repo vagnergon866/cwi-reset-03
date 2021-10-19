@@ -24,7 +24,7 @@ public class DiretorController {
         this.diretorService.cadastrarDiretor(diretorRequest);
      }
     @GetMapping
-    public List<Diretor> listarDiretores(String filtroNome) throws Exception{
+    public List<Diretor> listarDiretores(@RequestParam String filtroNome) throws Exception{
         return diretorService.listarDiretores(filtroNome);
     }
     @GetMapping("/{id}")

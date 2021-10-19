@@ -1,5 +1,6 @@
 package br.com.cwi.reset.vagnergoncalves.validador;
 
+import br.com.cwi.reset.vagnergoncalves.domain.StatusAtividade;
 import br.com.cwi.reset.vagnergoncalves.exception.*;
 
 import java.time.LocalDate;
@@ -27,5 +28,20 @@ public class BasicInfoRequiredValidator {
             throw new AnoInicioAtividadeInvalidoException(tipoDominioException.getSingular());
         }
 
+    }
+
+    public void accept(String nome, LocalDate dataCriacao, StatusAtividade statusAtividade) throws Exception {
+        if(nome == null){
+            throw new NomeNaoInformadoException();
+        }
+        if(dataCriacao == null){
+            throw new DescricaoNaoInformadaException();
+        }
+        if(statusAtividade == null){
+            throw new StatusAtividadeNaoInformadoException();
+        }
+        if (LocalDate.now().isBefore(dataCriacao)) {
+            throw new EstudioDoFuturoException();
+        }
     }
 }

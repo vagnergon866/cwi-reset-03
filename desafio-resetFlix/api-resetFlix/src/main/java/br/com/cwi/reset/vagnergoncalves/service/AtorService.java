@@ -41,7 +41,8 @@ public class AtorService {
         final Integer idGerado = atoresCadastrados.size() + 1;
 
         final Ator ator = new Ator(idGerado, atorRequest.getNome(),
-                atorRequest.getDataNascimento(), atorRequest.getStatusCarreira(),
+                atorRequest.getDataNascimento(),
+                atorRequest.getStatusCarreira(),
                 atorRequest.getAnoInicioAtividade());
 
         fakeDatabase.persisteAtor(ator);
