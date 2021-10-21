@@ -5,7 +5,8 @@ import br.com.cwi.reset.vagnergoncalves.domain.Estudio;
 public enum TipoDominioException {
     ATOR("ator", "atores"),
     DIRETOR("diretor", "diretores"),
-    Estudio("estudio", "estudios");
+    Estudio("estudio", "estudios"),
+    Filme("filme","filmes");
 
     private final String singular;
     private final String plural;

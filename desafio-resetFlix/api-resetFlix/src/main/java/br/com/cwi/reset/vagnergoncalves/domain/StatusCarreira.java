@@ -1,16 +1,8 @@
 package br.com.cwi.reset.vagnergoncalves.domain;
 
 public enum StatusCarreira {
-    EM_ATIVIDADE("Em atividade"),
-    APOSENTADO("Aposentado");
+    EM_ATIVIDADE,
+    APOSENTADO;
 
-    private String descricao;
-    StatusCarreira(String descricao){
-        this.descricao = descricao;
 
-    }
-
-    public String getDescricao() {
-        return descricao;
-    }
 }
