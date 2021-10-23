@@ -51,7 +51,4 @@ public class Filme {
     public Diretor getDiretor() {
         return diretor;
     }
-
-    public void remove(Pet petExistente) {
-    }
 }

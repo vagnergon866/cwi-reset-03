@@ -29,10 +29,4 @@ public class Pet {
     public void setEspecie(Especie especie) {
         this.especie = especie;
     }
-
-    public void remove(Pet petExistente) {
-    }
-
-    public void add(Pet pet) {
-    }
 }
