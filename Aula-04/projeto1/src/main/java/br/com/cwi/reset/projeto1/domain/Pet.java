@@ -1,7 +1,15 @@
 package br.com.cwi.reset.projeto1.domain;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "pet")
 public class Pet {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+
+    private Integer id;
     private String nome;
     private Integer idade;
     private Especie especie;
