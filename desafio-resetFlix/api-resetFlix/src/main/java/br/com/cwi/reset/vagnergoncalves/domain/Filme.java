@@ -1,8 +1,9 @@
 package br.com.cwi.reset.vagnergoncalves.domain;
 
 import java.util.List;
+import java.util.Objects;
 
-public class Filme{
+public class Filme {
 
     private Integer id;
     private String nome;
@@ -14,8 +15,7 @@ public class Filme{
     private List<PersonagemAtor> personagens;
     private String resumo;
 
-    public Filme(Integer id, String nome, Integer anoLancamento,
-                 String capaFilme, List<Genero> generos, Estudio estudio, Diretor diretor, List<PersonagemAtor> personagens, String resumo) {
+    public Filme(Integer id, String nome, Integer anoLancamento, String capaFilme, List<Genero> generos, Estudio estudio, Diretor diretor, List<PersonagemAtor> personagens, String resumo) {
         this.id = id;
         this.nome = nome;
         this.anoLancamento = anoLancamento;
@@ -29,10 +29,6 @@ public class Filme{
 
     public Integer getId() {
         return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
     }
 
     public String getNome() {
@@ -51,6 +47,14 @@ public class Filme{
         return generos;
     }
 
+    public Estudio getEstudio() {
+        return estudio;
+    }
+
+    public Diretor getDiretor() {
+        return diretor;
+    }
+
     public List<PersonagemAtor> getPersonagens() {
         return personagens;
     }
@@ -59,11 +63,16 @@ public class Filme{
         return resumo;
     }
 
-    public Estudio getEstudio() {
-        return estudio;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Filme filme = (Filme) o;
+        return Objects.equals(id, filme.id) && Objects.equals(nome, filme.nome) && Objects.equals(anoLancamento, filme.anoLancamento) && Objects.equals(capaFilme, filme.capaFilme) && Objects.equals(generos, filme.generos) && Objects.equals(estudio, filme.estudio) && Objects.equals(diretor, filme.diretor) && Objects.equals(personagens, filme.personagens) && Objects.equals(resumo, filme.resumo);
     }
 
-    public Diretor getDiretor() {
-        return diretor;
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, nome, anoLancamento, capaFilme, generos, estudio, diretor, personagens, resumo);
     }
 }

@@ -1,7 +1,7 @@
 package br.com.cwi.reset.vagnergoncalves.service;
 
 import br.com.cwi.reset.vagnergoncalves.domain.Ator;
-import br.com.cwi.reset.vagnergoncalves.domain.AtorEmAtividade;
+import br.com.cwi.reset.vagnergoncalves.response.AtorEmAtividade;
 import br.com.cwi.reset.vagnergoncalves.FakeDatabase;
 import br.com.cwi.reset.vagnergoncalves.domain.StatusCarreira;
 import br.com.cwi.reset.vagnergoncalves.exception.*;

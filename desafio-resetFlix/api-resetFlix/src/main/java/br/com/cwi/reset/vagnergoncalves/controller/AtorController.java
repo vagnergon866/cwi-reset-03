@@ -2,7 +2,7 @@ package br.com.cwi.reset.vagnergoncalves.controller;
 
 import br.com.cwi.reset.vagnergoncalves.FakeDatabase;
 import br.com.cwi.reset.vagnergoncalves.domain.Ator;
-import br.com.cwi.reset.vagnergoncalves.domain.AtorEmAtividade;
+import br.com.cwi.reset.vagnergoncalves.response.AtorEmAtividade;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;

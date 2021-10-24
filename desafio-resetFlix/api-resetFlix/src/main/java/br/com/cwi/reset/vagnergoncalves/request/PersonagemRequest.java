@@ -2,8 +2,9 @@ package br.com.cwi.reset.vagnergoncalves.request;
 
 import br.com.cwi.reset.vagnergoncalves.domain.TipoAtuacao;
 
-public class PersonagemRequest {
+import java.util.Objects;
 
+public class PersonagemRequest {
     private Integer idAtor;
     private String nomePersonagem;
     private String descricaoPersonagem;
@@ -30,5 +31,18 @@ public class PersonagemRequest {
 
     public TipoAtuacao getTipoAtuacao() {
         return tipoAtuacao;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        PersonagemRequest that = (PersonagemRequest) o;
+        return Objects.equals(idAtor, that.idAtor) && Objects.equals(nomePersonagem, that.nomePersonagem);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(idAtor, nomePersonagem);
     }
 }

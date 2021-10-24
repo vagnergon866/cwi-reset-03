@@ -1,4 +1,4 @@
-package br.com.cwi.reset.vagnergoncalves.domain;
+package br.com.cwi.reset.vagnergoncalves.response;
 
 import java.time.LocalDate;
 

@@ -1,7 +1,5 @@
 package br.com.cwi.reset.vagnergoncalves.request;
 
-import br.com.cwi.reset.vagnergoncalves.domain.Diretor;
-import br.com.cwi.reset.vagnergoncalves.domain.Estudio;
 import br.com.cwi.reset.vagnergoncalves.domain.Genero;
 
 import java.util.List;

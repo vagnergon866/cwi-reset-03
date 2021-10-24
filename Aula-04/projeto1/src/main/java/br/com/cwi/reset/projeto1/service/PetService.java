@@ -32,7 +32,7 @@ public class PetService {
             throw new PetJaExistenteException("Pet com o nome " + pet.getNome() + " já existe");
         }
 
-        return repository.findBysalvar(pet);
+        return repository.save(pet);
     }
 
     public void delete(String nome) throws PetNaoExistenteException {
