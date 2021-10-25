@@ -1,10 +1,16 @@
 package br.com.cwi.reset.vagnergoncalves.domain;
 
+import javax.persistence.*;
 import java.time.LocalDate;
 
+@Entity
+@Table(name = "ator")
 public class Ator {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+
     private String nome;
     private LocalDate dataNascimento;
     private StatusCarreira statusCarreira;
@@ -41,6 +47,8 @@ public class Ator {
     public Integer getAnoInicioAtividade() {
         return anoInicioAtividade;
     }
+    
+
 
 
 }
