@@ -2,12 +2,14 @@ package br.com.cwi.reset.vagnergoncalves.request;
 
 import br.com.cwi.reset.vagnergoncalves.domain.StatusCarreira;
 
+import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 
 
 public class AtorRequest {
-
+    @NotNull(message = "Campo obrigatório não informado. Favor informar o campo, nome")
     private String nome;
+    @NotNull(message = "Campo obrigatório não informado. Favor informar o campo, dataNascimento")
     private LocalDate dataNascimento;
     private StatusCarreira statusCarreira;
     private Integer anoInicioAtividade;

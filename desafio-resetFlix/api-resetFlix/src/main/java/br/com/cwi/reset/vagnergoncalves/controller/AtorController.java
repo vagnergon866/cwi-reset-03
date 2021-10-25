@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import br.com.cwi.reset.vagnergoncalves.request.AtorRequest;
 import br.com.cwi.reset.vagnergoncalves.service.AtorService;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -23,7 +24,7 @@ public class AtorController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public void criarAtor(@RequestBody AtorRequest atorRequest) throws Exception {
+    public void criarAtor(@RequestBody @Valid AtorRequest atorRequest) throws Exception {
         this.atorService.criarAtor(atorRequest);
     }
 
