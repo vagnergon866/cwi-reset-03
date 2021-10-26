@@ -1,11 +1,16 @@
 package br.com.cwi.reset.vagnergoncalves.domain;
 
+import javax.persistence.*;
 import java.util.List;
 import java.util.Objects;
 
+@Entity
+@Table(name = "filme")
 public class Filme {
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+
     private String nome;
     private Integer anoLancamento;
     private String capaFilme;
@@ -14,6 +19,10 @@ public class Filme {
     private Diretor diretor;
     private List<PersonagemAtor> personagens;
     private String resumo;
+
+    public Filme(){
+
+    }
 
     public Filme(Integer id, String nome, Integer anoLancamento, String capaFilme, List<Genero> generos, Estudio estudio, Diretor diretor, List<PersonagemAtor> personagens, String resumo) {
         this.id = id;

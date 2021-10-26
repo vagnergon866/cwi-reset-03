@@ -3,6 +3,7 @@ package br.com.cwi.reset.vagnergoncalves.service;
 import br.com.cwi.reset.vagnergoncalves.domain.Diretor;
 import br.com.cwi.reset.vagnergoncalves.exception.*;
 import br.com.cwi.reset.vagnergoncalves.repositoty.DiretorRepository;
+import br.com.cwi.reset.vagnergoncalves.repositoty.FilmeRepository;
 import br.com.cwi.reset.vagnergoncalves.request.DiretorRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

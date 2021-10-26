@@ -1,18 +1,35 @@
 package br.com.cwi.reset.vagnergoncalves.request;
 
+import br.com.cwi.reset.vagnergoncalves.domain.Filme;
 import br.com.cwi.reset.vagnergoncalves.domain.Genero;
 
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 public class FilmeRequest {
 
+    @NotNull(message = "Campo obrigatório não informado. Favor informar o campo nome.")
     private String nome;
+
+    @NotNull(message = "Campo obrigatório não informado. Favor informar o campo anoLancamento.")
     private Integer anoLancamento;
+
+    @NotNull(message = "Campo obrigatório não informado. Favor informar o campo capaFilme.")
     private String capaFilme;
+
+    @NotNull(message = "Campo obrigatório não informado. Favor informar o campo generos.")
     private List<Genero> generos;
+
+    @NotNull(message = "Campo obrigatório não informado. Favor informar o campo ideEstudio.")
     private Integer idEstudio;
+
+    @NotNull(message = "Campo obrigatório não informado. Favor informar o campo idDiretor.")
     private Integer idDiretor;
+
+    @NotNull(message = "Campo obrigatório não informado. Favor informar o campo personagens.")
     private List<PersonagemRequest> personagens;
+
+    @NotNull(message = "Campo obrigatório não informado. Favor informar o campo resumo.")
     private String resumo;
 
     public FilmeRequest(String nome, Integer anoLancamento, String capaFilme,
@@ -25,6 +42,13 @@ public class FilmeRequest {
         this.idDiretor = idDiretor;
         this.personagens = personagens;
         this.resumo = resumo;
+    }
+
+    public FilmeRequest(List<Filme> filmes){
+
+    }
+    public Filme convertObjeto(){
+        return new Filme(nome, anoLancamento, capaFilme, generos, idEstudio, idDiretor, personagens, resumo);
     }
 
     public String getNome() {
