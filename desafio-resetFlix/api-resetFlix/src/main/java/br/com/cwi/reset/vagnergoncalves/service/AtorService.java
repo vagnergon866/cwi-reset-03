@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 
-import java.time.chrono.ChronoLocalDate;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -19,8 +19,6 @@ public class AtorService {
 
     @Autowired
     private AtorRepository atorRepository;
-    private ChronoLocalDate dataNascimento;
-
 
     public void criarAtor(AtorRequest atorRequest) throws Exception {
         Ator ator = atorRequest.converteObjeto();
@@ -37,7 +35,6 @@ public class AtorService {
             }
 
         }
-
         Integer idGerado = atoresCadastrados.size() + 1;
 
         this.atorRepository.save(ator);
