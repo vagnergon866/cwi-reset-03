@@ -5,6 +5,7 @@ import br.com.cwi.reset.vagnergoncalves.domain.StatusCarreira;
 import br.com.cwi.reset.vagnergoncalves.repositoty.AtorRepository;
 import br.com.cwi.reset.vagnergoncalves.exception.*;
 import br.com.cwi.reset.vagnergoncalves.request.AtorRequest;
+import br.com.cwi.reset.vagnergoncalves.response.AtorEmAtividade;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -40,19 +41,19 @@ public class AtorService {
         this.atorRepository.save(ator);
     }
 
-    public List<Ator> listarAtoresEmAtividade(String filtroNome) throws Exception {
+    public List<AtorEmAtividade> listarAtoresEmAtividade(String filtroNome) throws Exception {
          List<Ator> atoresCadastrados = atorRepository.findByStatusCarreira(StatusCarreira.EM_ATIVIDADE);
 
         if (atoresCadastrados.isEmpty()) {
             throw new ListaVaziaException(TipoDominioException.ATOR.getSingular(), TipoDominioException.ATOR.getPlural());
         }
-        final List<Ator> retorno = new ArrayList<>();
 
+        List<AtorEmAtividade> retorno = new ArrayList<>();
         if (filtroNome != null) {
             for (Ator ator : atoresCadastrados) {
                 final boolean containsFilter = ator.getNome().toLowerCase(Locale.ROOT).contains(filtroNome.toLowerCase(Locale.ROOT));
                 if (containsFilter) {
-                    retorno.add(ator);
+                    retorno.add(new AtorEmAtividade(ator.getId(),ator.getNome(),ator.getDataNascimento()));
                 }
             }
         }

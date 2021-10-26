@@ -2,6 +2,7 @@ package br.com.cwi.reset.vagnergoncalves.controller;
 
 
 import br.com.cwi.reset.vagnergoncalves.domain.Ator;
+import br.com.cwi.reset.vagnergoncalves.response.AtorEmAtividade;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -26,9 +27,8 @@ public class AtorController {
     }
 
     @GetMapping(path = "/em_atividade")
-    public ResponseEntity<List<Ator>> listarAtoresEmAtividade(@RequestParam(required = false) String filtroNome) throws Exception {
-        List<Ator> listar = atorService.listarAtoresEmAtividade(filtroNome);
-         return new ResponseEntity<>(listar, HttpStatus.OK);
+    public List<AtorEmAtividade> listarAtoresEmAtividade(@RequestParam String filtroNome) throws Exception{
+        return this.atorService.listarAtoresEmAtividade(filtroNome);
     }
 
     @GetMapping(value = "/{id}")
