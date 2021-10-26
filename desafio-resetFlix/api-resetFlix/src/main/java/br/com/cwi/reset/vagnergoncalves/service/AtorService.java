@@ -1,16 +1,15 @@
 package br.com.cwi.reset.vagnergoncalves.service;
 
 import br.com.cwi.reset.vagnergoncalves.domain.Ator;
-import br.com.cwi.reset.vagnergoncalves.repositoty.AtorRepository;
-import br.com.cwi.reset.vagnergoncalves.response.AtorEmAtividade;
 import br.com.cwi.reset.vagnergoncalves.domain.StatusCarreira;
+import br.com.cwi.reset.vagnergoncalves.repositoty.AtorRepository;
 import br.com.cwi.reset.vagnergoncalves.exception.*;
 import br.com.cwi.reset.vagnergoncalves.request.AtorRequest;
-import br.com.cwi.reset.vagnergoncalves.validador.BasicInfoRequiredValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 
+import java.time.chrono.ChronoLocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -19,85 +18,78 @@ import java.util.Locale;
 public class AtorService {
 
     @Autowired
-    private AtorRepository repository;
+    private AtorRepository atorRepository;
+    private ChronoLocalDate dataNascimento;
 
 
     public void criarAtor(AtorRequest atorRequest) throws Exception {
+        Ator ator = atorRequest.converteObjeto();
 
-        final List<Ator> atoresCadastrados = repository.findAll();
+        if (ator.getNome().split(" ").length < 2) {
+            throw new NomeSobrenomeObrigatorioException(TipoDominioException.ATOR.getSingular());
+        }
 
-        for (Ator atorCadastrado : atoresCadastrados) {
-            if (atorCadastrado.getNome().equalsIgnoreCase(atorRequest.getNome())) {
-                throw new CadastroDuplicadoException(TipoDominioException.ATOR.getSingular(), atorRequest.getNome());
+         List<Ator> atoresCadastrados = this.atorRepository.findAll();
+        for(Ator atorCadastrado : atoresCadastrados){
+            if(atorCadastrado.getNome().equalsIgnoreCase(atorRequest.getNome())){
+                throw new CadastroDuplicadoException(TipoDominioException.ATOR,
+                        "Já existe um ator cadastrado para o nome " +atorRequest.getNome());
+            }
+
+        }
+
+        Integer idGerado = atoresCadastrados.size() + 1;
+
+        this.atorRepository.save(ator);
+    }
+
+    public List<Ator> listarAtoresEmAtividade(String filtroNome) throws Exception {
+         List<Ator> atoresCadastrados = atorRepository.findByStatusCarreira(StatusCarreira.EM_ATIVIDADE);
+
+        if (atoresCadastrados.isEmpty()) {
+            throw new ListaVaziaException(TipoDominioException.ATOR.getSingular(), TipoDominioException.ATOR.getPlural());
+        }
+        final List<Ator> retorno = new ArrayList<>();
+
+        if (filtroNome != null) {
+            for (Ator ator : atoresCadastrados) {
+                final boolean containsFilter = ator.getNome().toLowerCase(Locale.ROOT).contains(filtroNome.toLowerCase(Locale.ROOT));
+                if (containsFilter) {
+                    retorno.add(ator);
+                }
             }
         }
 
-        final Integer idGerado = atoresCadastrados.size() + 1;
+        if (retorno.isEmpty()) {
+            throw new FiltroNomeNaoEncontrado("Ator", filtroNome);
+        }
 
-        final Ator ator = new Ator(idGerado, atorRequest.getNome(),
-                atorRequest.getDataNascimento(),
-                atorRequest.getStatusCarreira(),
-                atorRequest.getAnoInicioAtividade());
-
-        repository.save(ator);
+        return retorno;
     }
 
-//    public List<AtorEmAtividade> listarAtoresEmAtividade(String filtroNome) throws Exception {
-//        final List<Ator> atoresCadastrados = repository.findByrecuperaAtores();
-//
-//        if (atoresCadastrados.isEmpty()) {
-//            throw new ListaVaziaException(TipoDominioException.ATOR.getSingular(), TipoDominioException.ATOR.getPlural());
-//        }
-//
-//        final List<AtorEmAtividade> retorno = new ArrayList<>();
-//
-//        if (filtroNome != null) {
-//            for (Ator ator : atoresCadastrados) {
-//                final boolean containsFilter = ator.getNome().toLowerCase(Locale.ROOT).contains(filtroNome.toLowerCase(Locale.ROOT));
-//                final boolean emAtividade = StatusCarreira.EM_ATIVIDADE.equals(ator.getStatusCarreira());
-//                if (containsFilter && emAtividade) {
-//                    retorno.add(new AtorEmAtividade(ator.getId(), ator.getNome(), ator.getDataNascimento()));
-//                }
-//            }
-//        } else {
-//            for (Ator ator : atoresCadastrados) {
-//                final boolean emAtividade = StatusCarreira.EM_ATIVIDADE.equals(ator.getStatusCarreira());
-//                if (emAtividade) {
-//                    retorno.add(new AtorEmAtividade(ator.getId(), ator.getNome(), ator.getDataNascimento()));
-//                }
-//            }
-//        }
-//
-//        if (retorno.isEmpty()) {
-//            throw new FiltroNomeNaoEncontrado("Ator", filtroNome);
-//        }
-//
-//        return retorno;
-//    }
-//
-//    public Ator consultarAtor(Integer id) throws Exception {
-//        if (id == null) {
-//            throw new IdNaoInformado();
-//        }
-//
-//        final List<Ator> atores = repository.findByrecuperaAtores();
-//
-//        for (Ator ator : atores) {
-//            if (ator.getId().equals(id)) {
-//                return ator;
-//            }
-//        }
-//
-//        throw new ConsultaIdInvalidoException(TipoDominioException.ATOR.getSingular(), id);
-//    }
-//
-//    public List<Ator> consultarAtores() throws Exception {
-//        final List<Ator> atores = repository.findByrecuperaAtores();
-//
-//        if (atores.isEmpty()) {
-//            throw new ListaVaziaException(TipoDominioException.ATOR.getSingular(), TipoDominioException.ATOR.getPlural());
-//        }
-//
-//        return atores;
-//    }
+    public Ator consultarAtor(Integer id) throws Exception {
+        if (id == null) {
+            throw new IdNaoInformado();
+        }
+
+        final List<Ator> atores = atorRepository.findAll();
+
+        for (Ator ator : atores) {
+            if (ator.getId().equals(id)) {
+                return ator;
+            }
+        }
+
+        throw new ConsultaIdInvalidoException(TipoDominioException.ATOR.getSingular(), id);
+    }
+
+    public List<Ator> consultarAtores() throws Exception {
+        final List<Ator> atores = atorRepository.findAll();
+
+        if (atores.isEmpty()) {
+            throw new ListaVaziaException(TipoDominioException.ATOR.getSingular(), TipoDominioException.ATOR.getPlural());
+        }
+
+        return atores;
+    }
 }

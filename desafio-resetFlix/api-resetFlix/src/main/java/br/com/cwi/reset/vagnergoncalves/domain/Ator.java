@@ -16,13 +16,17 @@ public class Ator {
     private StatusCarreira statusCarreira;
     private Integer anoInicioAtividade;
 
-    public Ator(Integer id, String nome, LocalDate dataNascimento, StatusCarreira statusCarreira, Integer anoInicioAtividade) {
-        this.id = id;
+    public Ator(){
+
+    }
+
+    public Ator( String nome, LocalDate dataNascimento, StatusCarreira statusCarreira, Integer anoInicioAtividade) {
         this.nome = nome;
         this.dataNascimento = dataNascimento;
         this.statusCarreira = statusCarreira;
         this.anoInicioAtividade = anoInicioAtividade;
     }
+
 
     public Integer getId() {
         return id;
