@@ -4,8 +4,6 @@ package br.com.cwi.reset.vagnergoncalves.controller;
 import br.com.cwi.reset.vagnergoncalves.domain.Ator;
 import br.com.cwi.reset.vagnergoncalves.response.AtorEmAtividade;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import br.com.cwi.reset.vagnergoncalves.request.AtorRequest;
 import br.com.cwi.reset.vagnergoncalves.service.AtorService;

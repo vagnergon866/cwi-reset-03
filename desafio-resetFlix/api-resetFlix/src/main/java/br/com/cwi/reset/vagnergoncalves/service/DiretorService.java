@@ -32,9 +32,6 @@ public class DiretorService {
                         "Já existe um diretor cadastrado para o nome" + diretorRequest.getNome());
             }
         }
-
-        final Integer idGerado = diretoresCadastrados.size() + 1;
-
         this.diretorRepository.save(diretor);
     }
 

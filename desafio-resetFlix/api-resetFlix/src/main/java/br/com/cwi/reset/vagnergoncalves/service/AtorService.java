@@ -1,5 +1,4 @@
 package br.com.cwi.reset.vagnergoncalves.service;
-
 import br.com.cwi.reset.vagnergoncalves.domain.Ator;
 import br.com.cwi.reset.vagnergoncalves.domain.StatusCarreira;
 import br.com.cwi.reset.vagnergoncalves.repositoty.AtorRepository;
@@ -8,8 +7,6 @@ import br.com.cwi.reset.vagnergoncalves.request.AtorRequest;
 import br.com.cwi.reset.vagnergoncalves.response.AtorEmAtividade;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,15 +26,12 @@ public class AtorService {
         }
 
          List<Ator> atoresCadastrados = this.atorRepository.findAll();
-        for(Ator atorCadastrado : atoresCadastrados){
-            if(atorCadastrado.getNome().equalsIgnoreCase(atorRequest.getNome())){
+        for(Ator atorCadastrado : atoresCadastrados) {
+            if (atorCadastrado.getNome().equalsIgnoreCase(atorRequest.getNome())) {
                 throw new CadastroDuplicadoException(TipoDominioException.ATOR,
-                        "Já existe um ator cadastrado para o nome " +atorRequest.getNome());
+                        "Já existe um ator cadastrado para o nome " + atorRequest.getNome());
             }
-
         }
-        Integer idGerado = atoresCadastrados.size() + 1;
-
         this.atorRepository.save(ator);
     }
 
