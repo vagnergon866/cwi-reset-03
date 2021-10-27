@@ -1,8 +1,6 @@
 package br.com.cwi.reset.vagnergoncalves.service;
 
-import br.com.cwi.reset.vagnergoncalves.domain.Filme;
-import br.com.cwi.reset.vagnergoncalves.domain.Genero;
-import br.com.cwi.reset.vagnergoncalves.domain.PersonagemAtor;
+import br.com.cwi.reset.vagnergoncalves.domain.*;
 import br.com.cwi.reset.vagnergoncalves.exception.*;
 import br.com.cwi.reset.vagnergoncalves.repositoty.FilmeRepository;
 import br.com.cwi.reset.vagnergoncalves.request.FilmeRequest;
@@ -16,7 +14,6 @@ import static java.util.Objects.isNull;
 @Service
 public class FilmeService {
 
-
     @Autowired
     private FilmeRepository filmeRepository;
     @Autowired
@@ -24,23 +21,27 @@ public class FilmeService {
     @Autowired
     private EstudioService estudioService;
     @Autowired
-    private PersonagemAtorService personagemAtorService;
+    private PersonagemService personagemAtorService;
 
-    public FilmeService(FilmeRepository filmeRepository) {
-
-    }
 
     public void criarFilme(FilmeRequest filmeRequest) throws Exception {
-        Filme filme = filmeRequest.convertObjeto();
 
-        Set<Genero> generoSet = new HashSet<>();
-        for (Genero genero : filme.getGeneros()) {
-            if (generoSet.contains(genero)) {
-                throw new GeneroDuplicadoException();
-            } else {
-                generoSet.add(genero);
-            }
+        Long generoDuplicado = filmeRequest.getGeneros().stream()
+                .filter(genero -> Collections.frequency(filmeRequest.getGeneros(), genero) > 1)
+                .count();
+
+        if(generoDuplicado > 0){
+            throw new GeneroDuplicadoException();
         }
+
+        Diretor diretor = diretorService.consultarDiretor(filmeRequest.getIdDiretor());
+        Estudio estudio = estudioService.consultarEstudio(filmeRequest.getIdEstudio());
+        List<PersonagemAtor> personagens = personagemAtorService.criarPersonagemAtor(filmeRequest.getPersonagens());
+
+        Filme filme = new Filme(filmeRequest.getNome(), filmeRequest.getAnoLancamento(),
+                filmeRequest.getCapaFilme(), filmeRequest.getGeneros(), estudio, diretor,
+                personagens, filmeRequest.getResumo());
+
 
         this.filmeRepository.save(filme);
     }
@@ -52,14 +53,14 @@ public class FilmeService {
             String nomeAtor) throws Exception {
         List<Filme> filmesCadastrados = this.filmeRepository.findAll();
 
-        if (filmesCadastrados.isEmpty()) {
+        if (filmeRepository.count() == 0) {
             throw new ListaVaziaException(TipoDominioException.FILME.getSingular(), TipoDominioException.FILME.getPlural());
         }
 
-        final List<Filme> filtrarNomePersonagem = filtrarNomePersonagem(filmesCadastrados, nomePersonagem);
-        final List<Filme> filtrarNomeAtor = filtrarNomeAtor(filtrarNomePersonagem, nomeAtor);
-        final List<Filme> filtrarNomeDiretor = filtrarNomeDiretor(filtrarNomeAtor, nomeDiretor);
-        final List<Filme> filtroFinal = filtrarNomeFilme(filtrarNomeDiretor, nomeFilme);
+        List<Filme> filtrarNomePersonagem = filtrarNomePersonagem(filmesCadastrados, nomePersonagem);
+        List<Filme> filtrarNomeAtor = filtrarNomeAtor(filtrarNomePersonagem, nomeAtor);
+        List<Filme> filtrarNomeDiretor = filtrarNomeDiretor(filtrarNomeAtor, nomeDiretor);
+        List<Filme> filtroFinal = filtrarNomeFilme(filtrarNomeDiretor, nomeFilme);
 
         if (filtroFinal.isEmpty()) {
             throw new FiltrosNaoEncontradosEmFilmesException(nomeFilme, nomeDiretor, nomePersonagem, nomeAtor);
@@ -68,7 +69,7 @@ public class FilmeService {
         return filtroFinal;
     }
 
-    private List<Filme> filtrarNomeFilme(final List<Filme> listaOriginal, final String nome) {
+    private List<Filme> filtrarNomeFilme(final List<Filme> listaOriginal, String nome) {
         if (isNull(nome)) {
             return listaOriginal;
         }
@@ -92,7 +93,7 @@ public class FilmeService {
         final List<Filme> filmeFiltrado = new ArrayList<>();
 
         for (Filme filme : listaOriginal) {
-            if (filme.getDiretor().getNome().toLowerCase(Locale.ROOT).equalsIgnoreCase(nome.toLowerCase(Locale.ROOT))) {
+            if (filme.getNome().toLowerCase(Locale.ROOT).equalsIgnoreCase(nome.toLowerCase(Locale.ROOT))) {
                 filmeFiltrado.add(filme);
             }
         }
@@ -140,4 +141,5 @@ public class FilmeService {
 
         return filmeFiltrado;
     }
+
 }

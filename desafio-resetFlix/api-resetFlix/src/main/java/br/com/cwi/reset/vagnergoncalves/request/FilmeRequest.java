@@ -1,8 +1,9 @@
 package br.com.cwi.reset.vagnergoncalves.request;
 
-import br.com.cwi.reset.vagnergoncalves.domain.Filme;
 import br.com.cwi.reset.vagnergoncalves.domain.Genero;
 
+import javax.validation.Valid;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.util.List;
 
@@ -18,6 +19,7 @@ public class FilmeRequest {
     private String capaFilme;
 
     @NotNull(message = "Campo obrigatório não informado. Favor informar o campo generos.")
+    @NotEmpty(message = "Deve ser informado pelo menos um gênero para o cadastro do filme.")
     private List<Genero> generos;
 
     @NotNull(message = "Campo obrigatório não informado. Favor informar o campo ideEstudio.")
@@ -27,6 +29,7 @@ public class FilmeRequest {
     private Integer idDiretor;
 
     @NotNull(message = "Campo obrigatório não informado. Favor informar o campo personagens.")
+    @Valid
     private List<PersonagemRequest> personagens;
 
     @NotNull(message = "Campo obrigatório não informado. Favor informar o campo resumo.")
@@ -43,12 +46,8 @@ public class FilmeRequest {
         this.personagens = personagens;
         this.resumo = resumo;
     }
+    public FilmeRequest(){
 
-    public FilmeRequest(List<Filme> filmes){
-
-    }
-    public Filme convertObjeto(){
-        return new Filme(nome, anoLancamento, capaFilme, generos, idEstudio, idDiretor, personagens, resumo);
     }
 
     public String getNome() {
