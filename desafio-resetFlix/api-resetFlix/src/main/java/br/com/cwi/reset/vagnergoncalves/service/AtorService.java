@@ -95,7 +95,7 @@ public class AtorService {
             throw new CadastroDuplicadoException(TipoDominioException.ATOR.getSingular(), atorRequest.getNome());
         }
         ator.setId(id);
-        atorRepository.save(ator);
+        this.atorRepository.save(ator);
     }
 
     public void removeAtor(Integer id) throws Exception {
@@ -105,7 +105,7 @@ public class AtorService {
         if (personagemService.atorComPersonagem(id)) {
             throw new AtorComPersonagemException();
         }
-        atorRepository.delete(ator);
+        this.atorRepository.delete(ator);
     }
 
 

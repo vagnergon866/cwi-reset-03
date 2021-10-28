@@ -25,8 +25,8 @@ public class Diretor {
         this.anoInicioAtividade = anoInicioAtividade;
     }
 
-    public Integer getId() {
-        return id;
+    public Integer getId(Integer id) {
+        return this.id;
     }
 
     public void setId(Integer id) {

@@ -7,9 +7,7 @@ import br.com.cwi.reset.vagnergoncalves.request.DiretorRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-
 import java.util.List;
-
 
 @Service
 public class DiretorService {
@@ -17,6 +15,8 @@ public class DiretorService {
     @Autowired
     private DiretorRepository diretorRepository;
 
+    @Autowired
+    private FilmeService filmeService;
 
     public void cadastrarDiretor(DiretorRequest diretorRequest) throws Exception {
         Diretor diretor = diretorRequest.convertObjeto();
@@ -59,10 +59,30 @@ public class DiretorService {
          List<Diretor> diretores = diretorRepository.findAll();
 
         for (Diretor diretor : diretores) {
-            if (diretor.getId().equals(id)) {
+            if (diretor.getId(id).equals(id)) {
                 return diretor;
             }
         }
         throw new ConsultaIdInvalidoException(TipoDominioException.DIRETOR.getSingular(), id);
+    }
+
+    public void atualizarDiretor(Integer id, DiretorRequest diretorRequest)throws Exception{
+        Diretor diretor = consultarDiretor(id);
+        Diretor diretorCadastrado = (Diretor) diretorRepository.findByNomeContainsIgnoreCase(diretorRequest.getNome());
+        if (diretorCadastrado != null){
+            throw new CadastroDuplicadoException(TipoDominioException.DIRETOR.getSingular(), diretorRequest.getNome());
+        }
+         diretor.getId(id);
+        this.diretorRepository.save(diretor);
+    }
+
+    public void removeDiretor(Integer id) throws Exception {
+
+        Diretor diretor = consultarDiretor(id);
+
+        if (filmeService.diretorComFilmes(id)) {
+            throw new DiretorComFilmeException();
+        }
+        this.diretorRepository.delete(diretor);
     }
 }

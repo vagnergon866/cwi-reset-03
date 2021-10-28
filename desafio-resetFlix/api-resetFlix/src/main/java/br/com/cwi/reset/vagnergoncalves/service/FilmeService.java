@@ -142,4 +142,15 @@ public class FilmeService {
         return filmeFiltrado;
     }
 
+    public Boolean diretorComFilmes(Integer idDiretor){
+        List<Filme> diretores = filmeRepository.findByDiretorIdEquals(idDiretor);
+
+        Boolean diretorContemFilme = false;
+        if (!diretores.isEmpty()){
+            diretorContemFilme = true;
+        }
+        return diretorContemFilme;
+    }
+
+
 }

@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -28,6 +29,16 @@ public class DiretorController {
     @GetMapping(value = "/{id}")
     public Diretor consultarDiretor(@PathVariable Integer id)throws Exception{
         return diretorService.consultarDiretor(id);
+    }
+
+    @PutMapping("/{id}")
+    public void atualizarDiretor(@PathVariable @Valid Integer id, @RequestBody @Valid DiretorRequest diretorRequest) throws Exception{
+        this.diretorService.atualizarDiretor(id, diretorRequest);
+    }
+
+    @DeleteMapping("/{id}")
+    public void removerDiretores(@PathVariable @Valid Integer id)throws Exception{
+        diretorService.removeDiretor(id);
     }
 
 }
