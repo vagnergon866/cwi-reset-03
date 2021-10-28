@@ -55,4 +55,8 @@ public class PersonagemService {
         return atorContemPersonagem;
     }
 
+    public void removerPersonagens(List<PersonagemAtor> personagemAtores){
+        personagemRepository.deleteAll(personagemAtores);
+    }
+
  }
