@@ -9,8 +9,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.*;
 
-import static java.util.Objects.isNull;
-
 @Service
 public class EstudioService {
 
@@ -18,54 +16,35 @@ public class EstudioService {
     private EstudioRepository estudioRepository;
 
     public void criarEstudio(EstudioRequest estudioRequest) throws Exception {
-        Estudio estudio = estudioRequest.converteObjeto();
 
-        List<Estudio> estudiosCadastrados = this.estudioRepository.findAll();
-
-        for (Estudio estudioCadastrado : estudiosCadastrados) {
-            if (estudioCadastrado.getNome().equalsIgnoreCase(estudioRequest.getNome())) {
-                throw new CadastroDuplicadoException(TipoDominioException.ESTUDIO,
-                        "Já existe um estúdio cadastrado para o nome " + estudioRequest.getNome());
+            Estudio estudiosCadastrados = estudioRepository.findByNomeEqualsIgnoreCase(estudioRequest.getNome());
+            if(estudiosCadastrados != null){
+                throw new CadastroDuplicadoException(TipoDominioException.ESTUDIO.getSingular(),estudioRequest.getNome());
             }
-        }
-        this.estudioRepository.save(estudio);
-    }
 
-    public List<Estudio> consultarEstudios(String filtroNome) throws Exception {
-         List<Estudio> estudiosCadastrados = this.estudioRepository.findAll();
-         List<Estudio> estudios = new ArrayList<>();
+            Estudio estudio = new Estudio(
+                    estudioRequest.getNome(),
+                    estudioRequest.getDescricao(),
+                    estudioRequest.getDataCriacao(),
+                    estudioRequest.getStatusAtividade());
 
-        if (estudiosCadastrados.isEmpty()) {
-            throw new ListaVaziaException(TipoDominioException.ESTUDIO.getSingular(), TipoDominioException.ESTUDIO.getPlural());
+            estudioRepository.save(estudio);
         }
 
-        if (!isNull(filtroNome)) {
-            for (Estudio estudio : estudiosCadastrados) {
-                if (estudio.getNome().toLowerCase(Locale.ROOT).contains(filtroNome.toLowerCase(Locale.ROOT))) {
-                    estudios.add(estudio);
-                }
+        public List<Estudio> consultarEstudios(String filtroNome) throws Exception {
+            if(estudioRepository.count() == 0){
+                throw new ListaVaziaException(TipoDominioException.ESTUDIO.getSingular(), TipoDominioException.ESTUDIO.getPlural());
             }
-        } else {
-            estudios.addAll(estudiosCadastrados);
-        }
-        List<Estudio> retorno = estudioRepository.findByNomeContainingIgnoreCase(filtroNome);
-        if (estudios.isEmpty()) {
-            throw new FiltroNomeNaoEncontrado("Estúdio", filtroNome);
-        }
 
-        return estudios;
-    }
-
-    public Estudio consultarEstudio(Integer id) throws Exception {
-        if (isNull(id)) {
-            throw new IdNaoInformado();
+            List<Estudio> resultado = estudioRepository.findByNomeContainingIgnoreCase(filtroNome);
+            if (resultado.isEmpty()) {
+                throw new FiltroNomeNaoEncontrado("Estudio", filtroNome);
+            }
+            return resultado;
         }
 
-        return this.estudioRepository.findAll()
-                .stream().filter(e -> e.getId().equals(id))
-                .findFirst()
-                .orElseThrow(() -> new ConsultaIdInvalidoException(
-                                TipoDominioException.ESTUDIO.getSingular(),
-                                id));
-    }
+        public Estudio consultarEstudio(Integer id) throws Exception {
+            return estudioRepository.findById(id)
+                    .orElseThrow(()-> new ConsultaIdInvalidoException(TipoDominioException.ESTUDIO.getSingular(), id));
+        }
 }

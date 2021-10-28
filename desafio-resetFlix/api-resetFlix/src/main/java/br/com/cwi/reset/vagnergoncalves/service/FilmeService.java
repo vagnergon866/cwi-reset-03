@@ -21,7 +21,7 @@ public class FilmeService {
     @Autowired
     private EstudioService estudioService;
     @Autowired
-    private PersonagemService personagemAtorService;
+    private PersonagemService personagemService;
 
 
     public void criarFilme(FilmeRequest filmeRequest) throws Exception {
@@ -36,7 +36,7 @@ public class FilmeService {
 
         Diretor diretor = diretorService.consultarDiretor(filmeRequest.getIdDiretor());
         Estudio estudio = estudioService.consultarEstudio(filmeRequest.getIdEstudio());
-        List<PersonagemAtor> personagens = personagemAtorService.criarPersonagemAtor(filmeRequest.getPersonagens());
+        List<PersonagemAtor> personagens = personagemService.criarPersonagemAtor(filmeRequest.getPersonagens());
 
         Filme filme = new Filme(filmeRequest.getNome(), filmeRequest.getAnoLancamento(),
                 filmeRequest.getCapaFilme(), filmeRequest.getGeneros(), estudio, diretor,

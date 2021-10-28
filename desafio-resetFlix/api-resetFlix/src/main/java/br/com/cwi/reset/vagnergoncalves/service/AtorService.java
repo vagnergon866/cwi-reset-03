@@ -1,4 +1,5 @@
 package br.com.cwi.reset.vagnergoncalves.service;
+
 import br.com.cwi.reset.vagnergoncalves.domain.Ator;
 import br.com.cwi.reset.vagnergoncalves.domain.StatusCarreira;
 import br.com.cwi.reset.vagnergoncalves.repositoty.AtorRepository;
@@ -17,6 +18,8 @@ public class AtorService {
 
     @Autowired
     private AtorRepository atorRepository;
+    @Autowired
+    private PersonagemService personagemService;
 
     public void criarAtor(AtorRequest atorRequest) throws Exception {
         Ator ator = atorRequest.converteObjeto();
@@ -25,18 +28,18 @@ public class AtorService {
             throw new NomeSobrenomeObrigatorioException(TipoDominioException.ATOR.getSingular());
         }
 
-         List<Ator> atoresCadastrados = this.atorRepository.findAll();
-        for(Ator atorCadastrado : atoresCadastrados) {
+        List<Ator> atoresCadastrados = this.atorRepository.findAll();
+        for (Ator atorCadastrado : atoresCadastrados) {
             if (atorCadastrado.getNome().equalsIgnoreCase(atorRequest.getNome())) {
-                throw new CadastroDuplicadoException(TipoDominioException.ATOR,
-                        "Já existe um ator cadastrado para o nome " + atorRequest.getNome());
+                throw new CadastroDuplicadoException(TipoDominioException.ATOR.getSingular(), atorRequest.getNome());
+
             }
         }
         this.atorRepository.save(ator);
     }
 
     public List<AtorEmAtividade> listarAtoresEmAtividade(String filtroNome) throws Exception {
-         List<Ator> atoresCadastrados = atorRepository.findByStatusCarreira(StatusCarreira.EM_ATIVIDADE);
+        List<Ator> atoresCadastrados = atorRepository.findByStatusCarreira(StatusCarreira.EM_ATIVIDADE);
 
         if (atoresCadastrados.isEmpty()) {
             throw new ListaVaziaException(TipoDominioException.ATOR.getSingular(), TipoDominioException.ATOR.getPlural());
@@ -47,7 +50,7 @@ public class AtorService {
             for (Ator ator : atoresCadastrados) {
                 final boolean containsFilter = ator.getNome().toLowerCase(Locale.ROOT).contains(filtroNome.toLowerCase(Locale.ROOT));
                 if (containsFilter) {
-                    retorno.add(new AtorEmAtividade(ator.getId(),ator.getNome(),ator.getDataNascimento()));
+                    retorno.add(new AtorEmAtividade(ator.getId(), ator.getNome(), ator.getDataNascimento()));
                 }
             }
         }
@@ -84,4 +87,26 @@ public class AtorService {
 
         return atores;
     }
+
+    public void atualizarAtor(Integer id, AtorRequest atorRequest) throws Exception {
+        Ator ator = consultarAtor(id);
+        Ator atorCadastrado = atorRepository.findByNomeIgnoreCase(atorRequest.getNome());
+        if (atorCadastrado != null) {
+            throw new CadastroDuplicadoException(TipoDominioException.ATOR.getSingular(), atorRequest.getNome());
+        }
+        ator.setId(id);
+        atorRepository.save(ator);
+    }
+
+    public void removeAtor(Integer id) throws Exception {
+
+        Ator ator = consultarAtor(id);
+
+        if (personagemService.atorComPersonagem(id)) {
+            throw new AtorComPersonagemException();
+        }
+        atorRepository.delete(ator);
+    }
+
+
 }

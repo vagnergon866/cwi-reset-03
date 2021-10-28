@@ -39,6 +39,16 @@ public class AtorController {
         return this.atorService.consultarAtores();
     }
 
+    @PutMapping("/{id}")
+    public void atualizarAtor(@PathVariable @Valid Integer id, @RequestBody @Valid AtorRequest atorRequest) throws Exception{
+        this.atorService.atualizarAtor(id, atorRequest);
+    }
+
+    @DeleteMapping("/{id}")
+    public void removerAtor(@PathVariable @Valid Integer id) throws Exception{
+        this.atorService.removeAtor(id);
+    }
+
 
 
 }
