@@ -11,6 +11,6 @@ public interface FilmeRepository extends CrudRepository<Filme, Integer> {
 
     List<Filme> findAll();
     List<Filme> findByDiretorIdEquals(Integer idDiretor);
-
+  
 
 }

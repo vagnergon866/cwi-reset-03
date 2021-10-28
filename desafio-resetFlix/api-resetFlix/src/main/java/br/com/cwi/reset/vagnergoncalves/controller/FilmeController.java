@@ -32,4 +32,9 @@ public class FilmeController {
             @RequestParam String nomeAtor) throws Exception {
         return this.filmeService.consultarFilmes(nomeFilme, nomeDiretor, nomePersonagem, nomeAtor);
     }
+
+    @DeleteMapping("/{id}")
+    public void removerFilme(@PathVariable @Valid Integer id) throws Exception{
+        filmeService.removerFilme(id);
+    }
 }
