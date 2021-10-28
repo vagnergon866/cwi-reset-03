@@ -152,5 +152,15 @@ public class FilmeService {
         return diretorContemFilme;
     }
 
+    public void removerFilme(Integer id) throws Exception{
+      Filme filme = filmeRepository.findById(id).orElseThrow(()
+              -> new ConsultaIdInvalidoException("filme", id));
+
+      List<PersonagemAtor> personagens = filme.getPersonagens();
+      personagemService.removerPersonagens(personagens);
+      filmeRepository.deleteById(id);
+    }
+
+
 
 }
