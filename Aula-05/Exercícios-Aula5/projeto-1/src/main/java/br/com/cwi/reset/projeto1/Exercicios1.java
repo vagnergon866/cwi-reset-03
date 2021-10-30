@@ -52,5 +52,7 @@ public class Exercicios1 {
         }
         return Arrays.asList(ints);
     }
+
+
 }
 
